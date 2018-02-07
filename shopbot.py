@@ -33,7 +33,7 @@ async def shop_task():
                         value=latest_gear["brand"]["frequent_skill"]["name"])
         embed.add_field(name="Rarity", value=latest_gear["rarity"]+1)
 
-        await bot.send_message(bot.get_channel("407665743581151242"),
+        await bot.send_message(bot.get_channel(botinfo.shop_channel),
                                embed=embed)
 
         update_time = merch[0]["end_time"] + 10
@@ -46,12 +46,8 @@ async def on_ready():
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
+    print(botinfo.shop_channel)
     print('------')
-
-@bot.command(pass_context=True)
-async def ping(ctx):
-    print(ctx.message.channel.id)
-    await bot.say("pong")
 
 bot.loop.create_task(shop_task())
 bot.run(botinfo.token)
